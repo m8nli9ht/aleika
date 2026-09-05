@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aleïka — Danse Butō à Toulouse & Occitanie</title>
+  <meta name="description" content="Ateliers, cours et stages de danse Butō à Toulouse et en région Occitanie avec Aleïka. L'art du mouvement incarné.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. CHARTE GRAPHIQUE & VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-main: #121212;         /* Gris charbon très sombre */
+      --bg-surface: #1a1a1a;      /* Charbon légèrement plus clair */
+      --bg-card: #222222;         /* Cartes & modules */
+      --text-main: #e0e0e0;       /* Blanc cassé / Gris clair (Pas de blanc pur) */
+      --text-muted: #a0a0a0;      /* Gris secondaire */
+      --accent-carmine: #9e1b22;  /* Rouge carmin */
+      --accent-hover: #bd2129;    /* Rouge carmin survol */
+      --border-color: #2a2a2a;    /* Lignes épurées */
+      --font-title: 'Cinzel', 'Noto Serif JP', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* ==========================================================================
+       2. REINITIALISATION & BASE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-title);
+      color: var(--text-main);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Trait vertical de style calligraphique / minimaliste */
+    .kanji-accent {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--accent-carmine);
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION (HEADER)
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand span {
+      color: var(--accent-carmine);
+      margin-left: 0.5rem;
+      font-size: 0.9rem;
+      font-family: var(--font-body);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-carmine);
+    }
+
+    /* ==========================================================================
+       4. CONTENEUR DES PAGES / SECTIONS
+       ========================================================================== */
+    main {
+      margin-top: 80px;
+      min-height: calc(100vh - 160px);
+    }
+
+    .page-section {
+      display: none;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       5. COMPOSANTS TYPOGRAPHIQUES & BOUTONS
+       ========================================================================== */
+    .page-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      position: relative;
+    }
+
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background-color: var(--accent-carmine);
+    }
+
+    .section-subtitle {
+      font-size: 1.3rem;
+      margin: 2.5rem 0 1rem 0;
+      color: var(--text-main);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--accent-carmine);
+      color: var(--text-main);
+      padding: 0.8rem 1.8rem;
+      border: 1px solid var(--accent-carmine);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border-color: var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-surface);
+      border-color: var(--text-muted);
+      color: var(--text-main);
+    }
+
+    .btn-disabled {
+      background-color: #333333;
+      border-color: #333333;
+      color: #777777;
+      cursor: not-allowed;
+    }
+
+    /* ==========================================================================
+       6. SECTIONS SPECIFIQUES
+       ========================================================================== */
+    
+    /* Hero Section (Accueil) */
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-surface) 100%);
+      border: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    /* Quote Box (Philosophie) */
+    .quote-box {
+      background-color: var(--bg-surface);
+      border-left: 3px solid var(--accent-carmine);
+      padding: 2rem;
+      margin: 2rem 0;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .quote-box p {
+      margin-bottom: 1rem;
+    }
+
+    .quote-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Events Grid (Agenda) */
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .event-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .event-card {
+        flex-direction: row;
+      }
+    }
+
+    .event-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    @media (min-width: 768px) {
+      .event-image {
+        width: 30%;
+        height: auto;
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+      }
+    }
+
+    .event-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .event-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-meta {
+      font-size: 0.85rem;
+      color: var(--accent-carmine);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .event-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .event-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    /* Grille Tarifaire */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (min-width: 600px) {
+      .pricing-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .pricing-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--accent-carmine);
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .social-link:hover {
+      color: var(--text-main);
+      border-color: var(--accent-carmine);
+    }
+
+    /* ==========================================================================
+       7. PIED DE PAGE (FOOTER)
+       ========================================================================== */
+    .footer {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 2rem 1.5rem 2rem;
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .footer-bottom {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER / NAVIGATION
+       ========================================================================== -->
+  <header class="header">
+    <div class="brand">
+      <span class="kanji-accent">舞</span> Aleïka <span>— Danse Butō</span>
+    </div>
+    <nav>
+      <ul class="nav-menu">
+        <li class="nav-link active" onclick="switchTab('accueil')">Accueil</li>
+        <li class="nav-link" onclick="switchTab('philosophie')">La Danse Butō</li>
+        <li class="nav-link" onclick="switchTab('programme')">Programme</li>
+        <li class="nav-link" onclick="switchTab('parcours')">Parcours</li>
+        <li class="nav-link" onclick="switchTab('contact')">Contact</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         PAGE 1 : ACCUEIL
+         ========================================================================== -->
+    <section id="accueil" class="page-section active">
+      <div class="hero">
+        <h1>Danse Butō à Toulouse & Occitanie</h1>
+        <p class="subtitle">“Danse Butō : l’art du mouvement incarné”</p>
+        <button class="btn" onclick="switchTab('programme')">Découvrir le Programme</button>
+      </div>
+
+      <div class="quote-box">
+        <p>La vie est mouvement. Ton corps est mouvement.</p>
+        <p>À travers la <strong>danse Butō</strong>, le mouvement devient un espace d’écoute, de présence et de transformation.</p>
+        <p><span class="highlight">Ta propre danse, toi seule peux la danser.</span></p>
+      </div>
+
+      <h2 class="section-subtitle">Prochains Événements</h2>
+      <div id="home-events-preview" class="events-grid">
+        <!-- Généré dynamiquement par JS -->
+      </div>
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button class="btn btn-secondary" onclick="switchTab('programme')">Voir tout l'agenda</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 2 : LA DANSE BUTŌ (PHILOSOPHIE)
+         ========================================================================== -->
+    <section id="philosophie" class="page-section">
+      <h1 class="page-title">La Danse Butō : Philosophie, Mouvement & Transmission</h1>
+
+      <h2 class="section-subtitle">Une pratique d'écoute, de présence et de transformation</h2>
+      <div class="quote-box">
+        <p>La vie est mouvement.<br>Ton corps est mouvement.</p>
+        <p>À travers la danse Butō, le mouvement devient un espace d’écoute, de présence et de transformation.</p>
+        <p>Faire circuler ce qui stagne, ce qui s’est cristallisé dans le corps. Laisser émerger des mouvements non pensés, auxquels le mental n’accède pas toujours.</p>
+        <p><span class="highlight">Ta propre danse, toi seule peux la danser.</span></p>
+        <p>Le mouvement devient présence.<br>Ta présence devient conscience.</p>
+        <p>La <strong>conscience corporelle</strong> se nourrit, s’élève, se cultive. Elle ouvre un chemin vers l’Être.</p>
+        <p>Être présent dans ton corps.<br>Être présent dans ta vie.</p>
+        <p>La pratique du Butō invite à retrouver l’ancrage, l’écoute intérieure et une relation plus profonde au corps et au mouvement.</p>
+        <p>Un processus intime.<br>Un chemin profond pour revenir à l’essentiel.</p>
+        <p>Cela ne s’apprend pas seulement.<br><span class="highlight">Cela se vit.</span></p>
+        <p>À travers le mouvement, la présence et l’écoute du corps, chacun peut rencontrer sa propre manière d’être au monde.</p>
+      </div>
+
+      <h2 class="section-subtitle">À qui s'adressent les ateliers et stages ?</h2>
+      <p>Les ateliers et stages sont ouverts à tous, sans prérequis technique ni limite d'âge. Que vous soyez débutant ou praticien expérimenté, la pratique s'adapte aux possibilités de chaque corps.</p>
+
+      <div style="margin-top: 2.5rem; text-align: center;">
+        <button class="btn" onclick="switchTab('programme')">Consulter les prochains stages</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 3 : PROGRAMME (AGENDA)
+         ========================================================================== -->
+    <section id="programme" class="page-section">
+      <h1 class="page-title">Ateliers & Stages de Danse Butō à Toulouse et en Occitanie</h1>
+      
+      <p>Retrouvez ci-dessous le calendrier synchronisé de nos prochains ateliers et stages. Cliquez sur le bouton de réservation pour envoyer votre demande directement par e-mail.</p>
+
+      <div id="full-events-list" class="events-grid">
+        <!-- Généré dynamiquement depuis Google Calendar (Simulé) -->
+      </div>
+
+      <h2 class="section-subtitle">Tarifs & Conditions</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Modalités de Règlement</h3>
+          <p>Moyens de paiement acceptés : <strong>Espèces, Chèque, Wero</strong>.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">Un acompte/arrhes peut être demandé lors de la réservation par e-mail pour valider votre place.</p>
+        </div>
+        <div class="pricing-card">
+          <h3>Matériel à Prévoir</h3>
+          <p>• Tenue souple noire (de préférence)<br>• Bouteille d'eau<br>• De quoi prendre des notes si vous le souhaitez</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 4 : PARCOURS (A PROPOS)
+         ========================================================================== -->
+    <section id="parcours" class="page-section">
+      <h1 class="page-title">Aleïka (Sandrine HATAMOTO-THIBAUD)</h1>
+      <p style="color: var(--accent-carmine); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Enseignante & Artiste Butō</p>
+
+      <h2 class="section-subtitle">Des arts du mouvement à la révélation du Butō</h2>
+      <p>Depuis l’enfance, je baigne dans l’univers de la danse, explorant successivement la danse classique, néoclassique, contemporaine, le cirque et le théâtre.</p>
+      <p style="margin-top: 1rem;">À Paris, ma rencontre avec la danse Butō, à travers un spectacle de Juju Alishina, provoque en moi un profond bouleversement — un véritable « tsunami intérieur » — et marque un tournant décisif dans mon parcours artistique. Je deviens son élève, puis me forme auprès d’Atsushi Takenouchi et de Masaki Iwana, tous deux issus de la troisième génération des maîtres enseignants du Butô. J’ai également l’honneur de créer et danser à leurs côtés à plusieurs reprises.</p>
+
+      <h2 class="section-subtitle">Résidence à Tokyo & Recherches sur le mouvement incarné</h2>
+      <p>Mon parcours me conduit ensuite à Tokyo, où je réside pendant un an en tant qu’artiste invitée par le Ministère de la Culture du Japon. J’y poursuis ma formation au sein de la plus grande école de cirque pluridisciplinaire de Tokyo et commence parallèlement à transmettre mes premières recherches autour du « mouvement incarné ».</p>
+
+      <h2 class="section-subtitle">Transmission et philosophie</h2>
+      <p>Depuis, mes enseignements se nourrissent de rencontres, de pratiques et d’expériences vécues au fil de nombreux voyages en Asie. Aujourd’hui, je me consacre pleinement à la transmission de la danse Butō, de sa philosophie et de sa pratique, dans une approche fondée sur l’écoute du corps, la présence et le mouvement incarné.</p>
+
+      <h2 class="section-subtitle">Réseaux Sociaux</h2>
+      <div class="social-links">
+        <a href="https://www.facebook.com/profile.php?id=100057554694577" target="_blank" rel="noopener" class="social-link">
+          Facebook
+        </a>
+        <a href="https://www.instagram.com/aleika31/" target="_blank" rel="noopener" class="social-link">
+          Instagram
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PAGE 5 : CONTACT
+         ========================================================================== -->
+    <section id="contact" class="page-section">
+      <h1 class="page-title">Contacter Aleïka / Informations Pratiques</h1>
+
+      <p>Pour toute question sur les ateliers, l'organisation d'un stage ou des renseignements sur la pratique du Butō :</p>
+
+      <div class="quote-box" style="margin-top: 2rem;">
+        <p><strong>E-mail direct :</strong> <a href="mailto:contact@buto-aleika.fr" style="color: var(--accent-carmine);">contact@buto-aleika.fr</a></p>
+        <p><strong>Zone d'intervention :</strong> Toulouse et région Occitanie.</p>
+        <p><strong>Inscription :</strong> Les inscriptions s'effectuent par e-mail direct ou en cliquant sur les boutons « Réserver ma place » sur la page Programme.</p>
+      </div>
+
+      <div class="social-links">
+        <a href="https://www.facebook.com/profile.php?id=100057554694577" target="_blank" rel="noopener" class="social-link">Page Facebook</a>
+        <a href="https://www.instagram.com/aleika31/" target="_blank" rel="noopener" class="social-link">Profil Instagram</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h3 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 1rem;">Aleïka — Danse Butō</h3>
+        <p>Ateliers, cours et stages de danse Butō à Toulouse et en région Occitanie.</p>
+      </div>
+      <div>
+        <h4 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 0.9rem;">Navigation</h4>
+        <ul style="font-size: 0.8rem; line-height: 2;">
+          <li><a onclick="switchTab('accueil')">Accueil</a></li>
+          <li><a onclick="switchTab('philosophie')">La Danse Butō</a></li>
+          <li><a onclick="switchTab('programme')">Programme</a></li>
+          <li><a onclick="switchTab('parcours')">Parcours</a></li>
+          <li><a onclick="switchTab('contact')">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© Aleïka — Tous droits réservés.</p>
+      <p><a href="#">Mentions Légales</a> | <a href="#">Politique de Confidentialité</a></p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LOGIQUE JAVASCRIPT
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. NAVIGATION PAR ONGLETS (SINGLE PAGE APPLICATION)
+       -------------------------------------------------------------------------- */
+    function switchTab(tabId) {
+      // Masquer toutes les pages
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      // Désactiver tous les liens de nav
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+
+      // Activer la section ciblée
+      const targetSection = document.getElementById(tabId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      // Mettre en surbrillance l'onglet correspondant
+      const activeLink = Array.from(navLinks).find(link => 
+        link.getAttribute('onclick') && link.getAttribute('onclick').includes(tabId)
+      );
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+
+      // Remonter en haut de page
+      window.scrollTo(0, 0);
+    }
+
+    /* --------------------------------------------------------------------------
+       2. SIMULATEUR D'API GOOGLE CALENDAR
+       (Simule les données qui seront lues depuis ton agenda Google)
+       -------------------------------------------------------------------------- */
+    const mockGoogleCalendarEvents = [
+      {
+        id: "1",
+        title: "Atelier Hebdomadaire Butō — Corps & Présence",
+        date: "Tous les mardis de 19h00 à 21h00",
+        location: "Studio Dance, Toulouse",
+        description: "Un temps régulier pour approfondir la conscience corporelle, laisser émerger le mouvement spontané et libérer les tensions.",
+        imageUrl: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "2",
+        title: "Stage d'initiation Butō — Le Corps Invisible",
+        date: "Samedi 24 & Dimanche 25 Octobre 2026",
+        location: "Espace Occitanie, Toulouse",
+        description: "Deux jours en immersion pour explorer l'ancrage, l'improvisation et la philosophie de la danse Butō.",
+        imageUrl: "https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "3",
+        title: "Stage Intensif Butō — L'Émergence [COMPLET]",
+        date: "Samedi 14 Novembre 2026",
+        location: "Studio Mouvement, Toulouse",
+        description: "Stage d'approfondissement thématique axé sur la mémoire corporelle et la transformation.",
+        imageUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    /* --------------------------------------------------------------------------
+       3. GENERATION DES EVENEMENTS ET GESTION DU MAILTO
+       -------------------------------------------------------------------------- */
+    function generateMailtoUrl(eventTitle) {
+      const recipient = "contact@buto-aleika.fr";
+      const subject = encodeURIComponent(`Demande de réservation — ${eventTitle}`);
+      const body = encodeURIComponent(
+        `Bonjour Aleïka,\n\nJe souhaite m'inscrire à l'événement suivant : ${eventTitle}\n\nMes coordonnées :\n- Nom :\n- Prénom :\n- Téléphone :\n\nMerci de me confirmer la disponibilité ainsi que les modalités pour le règlement des arrhes.\n\n- Présence : (Merci de préciser si vous participez à toutes les dates prévues, si non, précisez les jours)\n`
+      );
+      return `mailto:${recipient}?subject=${subject}&body=${body}`;
+    }
+
+    function renderEvents() {
+      const fullListContainer = document.getElementById('full-events-list');
+      const homePreviewContainer = document.getElementById('home-events-preview');
+
+      if (!fullListContainer) return;
+
+      fullListContainer.innerHTML = '';
+      if (homePreviewContainer) homePreviewContainer.innerHTML = '';
+
+      mockGoogleCalendarEvents.forEach((evt, index) => {
+        // Verification du mot-clé COMPLET dans le titre
+        const isComplet = evt.title.toUpperCase().includes('COMPLET');
+
+        // Création du bouton adapté (Mailto ou Bouton Désactivé)
+        let buttonHtml = '';
+        if (isComplet) {
+          buttonHtml = `<button class="btn btn-disabled" disabled>Complet</button>`;
+        } else {
+          const mailtoLink = generateMailtoUrl(evt.title);
+          buttonHtml = `<a href="${mailtoLink}" class="btn">Réserver ma place</a>`;
+        }
+
+        const cardHtml = `
+          <article class="event-card">
+            <img src="${evt.imageUrl}" alt="${evt.title}" class="event-image" loading="lazy">
+            <div class="event-content">
+              <div>
+                <div class="event-meta">📍 ${evt.location} | 🗓️ ${evt.date}</div>
+                <h3 class="event-title">${evt.title}</h3>
+                <p class="event-desc">${evt.description}</p>
+              </div>
+              <div class="event-footer">
+                ${buttonHtml}
+              </div>
+            </div>
+          </article>
+        `;
+
+        // Ajout à la page Programme
+        fullListContainer.innerHTML += cardHtml;
+
+        // Ajout à l'aperçu de la page d'accueil (Limité aux 2 premiers)
+        if (homePreviewContainer && index < 2) {
+          homePreviewContainer.innerHTML += cardHtml;
+        }
+      });
+    }
+
+    // Initialisation au chargement de la page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderEvents();
+    });
+  </script>
+</body>
+</html>
