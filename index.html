@@ -19,7 +19,7 @@
       --bg-main: #121212;         /* Gris charbon très sombre */
       --bg-surface: #1a1a1a;      /* Charbon légèrement plus clair */
       --bg-card: #222222;         /* Cartes & modules */
-      --text-main: #e0e0e0;       /* Blanc cassé / Gris clair (Pas de blanc pur) */
+      --text-main: #e0e0e0;       /* Blanc cassé / Gris clair */
       --text-muted: #a0a0a0;      /* Gris secondaire */
       --accent-carmine: #9e1b22;  /* Rouge carmin */
       --accent-hover: #bd2129;    /* Rouge carmin survol */
@@ -67,7 +67,6 @@
       list-style: none;
     }
 
-    /* Trait vertical de style calligraphique / minimaliste */
     .kanji-accent {
       font-family: 'Noto Serif JP', serif;
       color: var(--accent-carmine);
@@ -139,6 +138,48 @@
       background-color: var(--accent-carmine);
     }
 
+    /* Menu Hamburger (Mobile) */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-surface);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 1px solid var(--border-color);
+        display: none;
+      }
+
+      .nav-menu.mobile-open {
+        display: flex;
+      }
+
+      .nav-link {
+        padding: 1.2rem 2rem;
+        border-bottom: 1px solid var(--border-color);
+        width: 100%;
+      }
+
+      .nav-link.active::after {
+        display: none;
+      }
+    }
+
     /* ==========================================================================
        4. CONTENEUR DES PAGES / SECTIONS
        ========================================================================== */
@@ -202,6 +243,7 @@
       letter-spacing: 0.1em;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-align: center;
     }
 
     .btn:hover {
@@ -345,7 +387,7 @@
 
     .event-footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       margin-top: auto;
     }
@@ -425,6 +467,14 @@
       }
     }
 
+    .footer-links a {
+      cursor: pointer;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-main);
+    }
+
     .footer-bottom {
       max-width: 1000px;
       margin: 0 auto;
@@ -454,8 +504,9 @@
     <div class="brand">
       <span class="kanji-accent">舞</span> Aleïka <span>— Danse Butō</span>
     </div>
+    <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu principal">☰</button>
     <nav>
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu">
         <li class="nav-link active" onclick="switchTab('accueil')">Accueil</li>
         <li class="nav-link" onclick="switchTab('philosophie')">La Danse Butō</li>
         <li class="nav-link" onclick="switchTab('programme')">Programme</li>
@@ -529,7 +580,7 @@
       <p>Retrouvez ci-dessous le calendrier synchronisé de nos prochains ateliers et stages. Cliquez sur le bouton de réservation pour envoyer votre demande directement par e-mail.</p>
 
       <div id="full-events-list" class="events-grid">
-        <!-- Généré dynamiquement depuis Google Calendar (Simulé) -->
+        <!-- Généré dynamiquement -->
       </div>
 
       <h2 class="section-subtitle">Tarifs & Conditions</h2>
@@ -565,12 +616,8 @@
 
       <h2 class="section-subtitle">Réseaux Sociaux</h2>
       <div class="social-links">
-        <a href="https://www.facebook.com/profile.php?id=100057554694577" target="_blank" rel="noopener" class="social-link">
-          Facebook
-        </a>
-        <a href="https://www.instagram.com/aleika31/" target="_blank" rel="noopener" class="social-link">
-          Instagram
-        </a>
+        <a href="https://www.facebook.com/profile.php?id=100057554694577" target="_blank" rel="noopener" class="social-link">Facebook</a>
+        <a href="https://www.instagram.com/aleika31/" target="_blank" rel="noopener" class="social-link">Instagram</a>
       </div>
     </section>
 
@@ -606,7 +653,7 @@
       </div>
       <div>
         <h4 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 0.9rem;">Navigation</h4>
-        <ul style="font-size: 0.8rem; line-height: 2;">
+        <ul class="footer-links" style="font-size: 0.8rem; line-height: 2;">
           <li><a onclick="switchTab('accueil')">Accueil</a></li>
           <li><a onclick="switchTab('philosophie')">La Danse Butō</a></li>
           <li><a onclick="switchTab('programme')">Programme</a></li>
@@ -629,21 +676,17 @@
        1. NAVIGATION PAR ONGLETS (SINGLE PAGE APPLICATION)
        -------------------------------------------------------------------------- */
     function switchTab(tabId) {
-      // Masquer toutes les pages
       const sections = document.querySelectorAll('.page-section');
       sections.forEach(sec => sec.classList.remove('active'));
 
-      // Désactiver tous les liens de nav
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => link.classList.remove('active'));
 
-      // Activer la section ciblée
       const targetSection = document.getElementById(tabId);
       if (targetSection) {
         targetSection.classList.add('active');
       }
 
-      // Mettre en surbrillance l'onglet correspondant
       const activeLink = Array.from(navLinks).find(link => 
         link.getAttribute('onclick') && link.getAttribute('onclick').includes(tabId)
       );
@@ -651,13 +694,19 @@
         activeLink.classList.add('active');
       }
 
-      // Remonter en haut de page
+      // Fermer le menu mobile si ouvert
+      document.getElementById('nav-menu').classList.remove('mobile-open');
+
       window.scrollTo(0, 0);
     }
 
+    function toggleMobileMenu() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('mobile-open');
+    }
+
     /* --------------------------------------------------------------------------
-       2. SIMULATEUR D'API GOOGLE CALENDAR
-       (Simule les données qui seront lues depuis ton agenda Google)
+       2. EVENEMENTS DU AGENDA (DONNEES & MAILING)
        -------------------------------------------------------------------------- */
     const mockGoogleCalendarEvents = [
       {
@@ -686,9 +735,6 @@
       }
     ];
 
-    /* --------------------------------------------------------------------------
-       3. GENERATION DES EVENEMENTS ET GESTION DU MAILTO
-       -------------------------------------------------------------------------- */
     function generateMailtoUrl(eventTitle) {
       const recipient = "contact@buto-aleika.fr";
       const subject = encodeURIComponent(`Demande de réservation — ${eventTitle}`);
@@ -696,6 +742,30 @@
         `Bonjour Aleïka,\n\nJe souhaite m'inscrire à l'événement suivant : ${eventTitle}\n\nMes coordonnées :\n- Nom :\n- Prénom :\n- Téléphone :\n\nMerci de me confirmer la disponibilité ainsi que les modalités pour le règlement des arrhes.\n\n- Présence : (Merci de préciser si vous participez à toutes les dates prévues, si non, précisez les jours)\n`
       );
       return `mailto:${recipient}?subject=${subject}&body=${body}`;
+    }
+
+    function createCardElement(evt) {
+      const isComplet = evt.title.toUpperCase().includes('COMPLET');
+      const buttonHtml = isComplet 
+        ? `<button class="btn btn-disabled" disabled>Complet</button>`
+        : `<a href="${generateMailtoUrl(evt.title)}" class="btn">Réserver ma place</a>`;
+
+      const article = document.createElement('article');
+      article.className = 'event-card';
+      article.innerHTML = `
+        <img src="${evt.imageUrl}" alt="${evt.title}" class="event-image" loading="lazy">
+        <div class="event-content">
+          <div>
+            <div class="event-meta">📍 ${evt.location} | 🗓️ ${evt.date}</div>
+            <h3 class="event-title">${evt.title}</h3>
+            <p class="event-desc">${evt.description}</p>
+          </div>
+          <div class="event-footer">
+            ${buttonHtml}
+          </div>
+        </div>
+      `;
+      return article;
     }
 
     function renderEvents() {
@@ -708,48 +778,15 @@
       if (homePreviewContainer) homePreviewContainer.innerHTML = '';
 
       mockGoogleCalendarEvents.forEach((evt, index) => {
-        // Verification du mot-clé COMPLET dans le titre
-        const isComplet = evt.title.toUpperCase().includes('COMPLET');
+        fullListContainer.appendChild(createCardElement(evt));
 
-        // Création du bouton adapté (Mailto ou Bouton Désactivé)
-        let buttonHtml = '';
-        if (isComplet) {
-          buttonHtml = `<button class="btn btn-disabled" disabled>Complet</button>`;
-        } else {
-          const mailtoLink = generateMailtoUrl(evt.title);
-          buttonHtml = `<a href="${mailtoLink}" class="btn">Réserver ma place</a>`;
-        }
-
-        const cardHtml = `
-          <article class="event-card">
-            <img src="${evt.imageUrl}" alt="${evt.title}" class="event-image" loading="lazy">
-            <div class="event-content">
-              <div>
-                <div class="event-meta">📍 ${evt.location} | 🗓️ ${evt.date}</div>
-                <h3 class="event-title">${evt.title}</h3>
-                <p class="event-desc">${evt.description}</p>
-              </div>
-              <div class="event-footer">
-                ${buttonHtml}
-              </div>
-            </div>
-          </article>
-        `;
-
-        // Ajout à la page Programme
-        fullListContainer.innerHTML += cardHtml;
-
-        // Ajout à l'aperçu de la page d'accueil (Limité aux 2 premiers)
         if (homePreviewContainer && index < 2) {
-          homePreviewContainer.innerHTML += cardHtml;
+          homePreviewContainer.appendChild(createCardElement(evt));
         }
       });
     }
 
-    // Initialisation au chargement de la page
-    document.addEventListener('DOMContentLoaded', () => {
-      renderEvents();
-    });
+    document.addEventListener('DOMContentLoaded', renderEvents);
   </script>
 </body>
 </html>
