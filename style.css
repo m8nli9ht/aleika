@@ -94,9 +94,14 @@ ul {
   font-family: var(--font-body);
 }
 
+/* --- MENU DESKTOP (Fixé ici) --- */
 .nav-menu {
-  display: flex;
+  display: flex;             /* Affiche les liens en ligne sur PC */
+  flex-direction: row;
   gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
@@ -107,6 +112,8 @@ ul {
   cursor: pointer;
   position: relative;
   padding-bottom: 4px;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .nav-link:hover,
@@ -125,7 +132,7 @@ ul {
 }
 
 .menu-toggle {
-  display: none;
+  display: none; /* Caché sur desktop */
   background: none;
   border: none;
   color: var(--text-main);
@@ -133,9 +140,10 @@ ul {
   cursor: pointer;
 }
 
+/* --- MENU MOBILE --- */
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block;
+    display: block; /* Visible uniquement sur mobile */
   }
 
   .nav-menu {
@@ -147,11 +155,11 @@ ul {
     flex-direction: column;
     gap: 0;
     border-bottom: 1px solid var(--border-color);
-    display: none;
+    display: none; /* Masqué par défaut sur mobile */
   }
 
   .nav-menu.mobile-open {
-    display: flex;
+    display: flex; /* S'affiche quand le bouton burger est cliqué */
   }
 
   .nav-link {
@@ -165,7 +173,6 @@ ul {
     display: none;
   }
 }
-
 /* ==========================================================================
    4. LAYOUT DES PAGES
    ========================================================================== */
