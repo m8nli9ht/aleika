@@ -552,3 +552,110 @@ main {
     justify-content: space-between;
   }
 }
+
+/* ==========================================================================
+   PAGE LA DANSE BUTO (MISE EN VALEUR)
+   ========================================================================== */
+.lead-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+}
+
+/* Grille des 3 Piliers */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .pillars-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pillar-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 1.8rem 1.2rem;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.pillar-card:hover {
+  border-color: var(--accent-carmine);
+}
+
+.pillar-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.pillar-card h3 {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  margin-bottom: 0.8rem;
+}
+
+.pillar-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Section "À qui s'adressent les cours" */
+.audience-box {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  margin: 2.5rem 0;
+}
+
+.audience-list {
+  margin-top: 1.2rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.audience-list li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.audience-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--accent-carmine);
+}
+
+.audience-list strong {
+  color: var(--text-main);
+}
+
+/* Bloc d'Appel à l'action (CTA) */
+.cta-block {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-main) 100%);
+  border: 1px solid var(--border-color);
+  margin-top: 3rem;
+}
+
+.cta-block h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.cta-block p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
