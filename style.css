@@ -277,25 +277,72 @@ main {
 /* ==========================================================================
    6. SECTIONS SPECIFIQUES
    ========================================================================== */
+/* ==========================================================================
+   HERO SECTION OPTIMISÉE (Ajustement luminosité & cadrage haut)
+   ========================================================================== */
 .hero {
+  position: relative;
   text-align: center;
-  padding: 5rem 1rem;
-  background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-surface) 100%);
+  padding: 6.5rem 1.5rem;
+  /* Overlay adouci (transparence de 30% à 70%) + alignement en HAUT de l'image (top center) */
+  background: 
+    linear-gradient(180deg, rgba(18, 18, 18, 0.10) 0%, rgba(18, 18, 18, 0.72) 100%),
+    url('main.jfif') top center / cover no-repeat;
   border: 1px solid var(--border-color);
   margin-bottom: 3rem;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.hero .page-title-hero {
+  font-size: 2.8rem;
+  margin-bottom: 0.8rem;
   line-height: 1.2;
+  /* Ombres portées renforcées pour maintenir une excellente lisibilité sur fond plus clair */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+}
+
+.hero .location-subtitle {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
 }
 
 .hero .subtitle {
-  font-size: 1.2rem;
-  color: var(--text-muted);
+  font-size: 1.25rem;
+  color: #ffffff;
   font-style: italic;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+.hero .brand-name {
+  font-family: var(--font-title);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #e63946; /* Rouge carmin plus lumineux pour ressortir sur la photo */
+  font-weight: 600;
   margin-bottom: 2rem;
+  font-style: normal;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+/* Adaptation Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 5rem 1rem 4rem 1rem;
+  }
+
+  .hero .page-title-hero {
+    font-size: 2.1rem;
+  }
+
+  .hero .subtitle {
+    font-size: 1.05rem;
+  }
 }
 
 /* --- CARTES CITATIONS --- */
@@ -407,12 +454,41 @@ main {
   margin-bottom: 0.5rem;
 }
 
+/* --- LISIBILITÉ LIEU ET DATE (EVENT META) --- */
 .event-meta {
-  font-size: 0.85rem;
-  color: var(--accent-carmine);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+}
+
+@media (min-width: 500px) {
+  .event-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.event-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main); /* Utilisation du blanc cassé lumineux (#f0f0f0) */
+  background-color: var(--bg-surface); /* Fond légèrement plus clair pour détacher l'élément */
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  letter-spacing: 0.02em;
+}
+
+.event-meta-item svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--accent-hover); /* Accentuation rouge vive sur les icônes uniquement */
+  flex-shrink: 0;
 }
 
 .event-desc {
@@ -537,11 +613,14 @@ main {
   margin-bottom: 2rem;
 }
 
+/* ==========================================================================
+   MISE EN VALEUR DE LA GRILLE DES 3 PILIERS
+   ========================================================================== */
 .pillars-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin: 2rem 0;
+  gap: 1.8rem;
+  margin: 2.5rem 0;
 }
 
 @media (min-width: 768px) {
@@ -551,32 +630,65 @@ main {
 }
 
 .pillar-card {
-  background-color: var(--bg-surface);
+  position: relative;
+  background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 1.8rem 1.2rem;
-  text-align: center;
-  transition: border-color 0.3s ease;
+  border-top: 3px solid var(--accent-carmine); /* Ligne d'accent supérieure */
+  padding: 2.2rem 1.5rem 1.8rem 1.5rem;
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
 .pillar-card:hover {
-  border-color: var(--accent-carmine);
+  transform: translateY(-4px);
+  border-color: var(--accent-hover);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.pillar-icon {
-  font-size: 2rem;
-  margin-bottom: 0.8rem;
+/* Grand chiffre stylized en filigrane en arrière-plan */
+.pillar-number {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  font-family: var(--font-title);
+  font-size: 4.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.04);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .pillar-card h3 {
-  font-size: 1.05rem;
+  font-family: var(--font-title);
+  font-size: 1.1rem;
   color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dotted var(--border-color);
+}
+
+.pillar-subtitle {
+  font-family: var(--font-title);
+  color: var(--accent-carmine);
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .pillar-card p {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
+}
+
+.pillar-card p strong {
+  color: var(--text-main);
 }
 
 .audience-box {
@@ -629,4 +741,92 @@ main {
   color: var(--text-muted);
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   FORMULAIRE DE CONTACT
+   ========================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 850px) {
+  .contact-grid {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.contact-form {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+@media (min-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+}
+
+.form-group input,
+.form-group textarea {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-carmine);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   LAYOUT PAGE STAGES & ATELIERS (2 COLONNES)
+   ========================================================================== */
+.stages-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .stages-layout {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
 }

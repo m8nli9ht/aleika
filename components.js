@@ -7,6 +7,33 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = window.location.pathname.split('/').pop();
   if (!currentPage || currentPage === '') currentPage = 'index.html';
 
+  // Liste centralisée des liens de navigation (pour Header & Footer)
+  const navItems = [
+    { href: 'index.html', label: 'Accueil' },
+    { href: 'la-danse-buto.html', label: 'La Danse Butō' },
+    { href: 'parcours.html', label: 'Aleïka' },
+    { href: 'stages-ateliers.html', label: 'Stages & Ateliers' },
+    { href: 'contact.html', label: 'Contact' }
+  ];
+
+  // Génération des items du menu header
+  const headerNavLinks = navItems.map(item => `
+    <li>
+      <a href="${item.href}" class="nav-link ${currentPage === item.href ? 'active' : ''}">
+        ${item.label}
+      </a>
+    </li>
+  `).join('');
+
+  // Génération des items du footer
+  const footerNavLinks = navItems.map(item => `
+    <li>
+      <a href="${item.href}" class="${currentPage === item.href ? 'active' : ''}">
+        ${item.label}
+      </a>
+    </li>
+  `).join('');
+
   // 2. Modèle Header
   const headerHTML = `
     <header class="header">
@@ -14,13 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="kanji-accent">舞</span> Aleïka <span>— Danse Butō</span>
       </div>
       <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu principal">☰</button>
-      <nav>
+      <nav aria-label="Navigation principale">
         <ul class="nav-menu" id="nav-menu">
-          <li><a href="index.html" class="nav-link ${currentPage === 'index.html' ? 'active' : ''}">Accueil</a></li>
-          <li><a href="la-danse-buto.html" class="nav-link ${currentPage === 'la-danse-buto.html' ? 'active' : ''}">La Danse Butō</a></li>
-          <li><a href="stages-ateliers.html" class="nav-link ${currentPage === 'stages-ateliers.html' ? 'active' : ''}">Programme</a></li>
-          <li><a href="parcours.html" class="nav-link ${currentPage === 'parcours.html' ? 'active' : ''}">Parcours</a></li>
-          <li><a href="contact.html" class="nav-link ${currentPage === 'contact.html' ? 'active' : ''}">Contact</a></li>
+          ${headerNavLinks}
         </ul>
       </nav>
     </header>
@@ -32,17 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="footer-content">
         <div>
           <h3 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 1rem;">Aleïka — Danse Butō</h3>
-          <p>Ateliers, cours et stages de danse Butō à Toulouse et en région Occitanie.</p>
+          <p>Ateliers et stages de danse Butō à Toulouse et en région Occitanie.</p>
         </div>
         <div>
           <h4 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 0.9rem;">Navigation</h4>
-          <ul class="footer-links" style="font-size: 0.8rem; line-height: 2;">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="la-danse-buto.html">La Danse Butō</a></li>
-            <li><a href="stages-ateliers.html">Programme</a></li>
-            <li><a href="parcours.html">Parcours</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
+          <nav aria-label="Navigation de pied de page">
+            <ul class="footer-links" style="font-size: 0.8rem; line-height: 2;">
+              ${footerNavLinks}
+            </ul>
+          </nav>
         </div>
       </div>
       <div class="footer-bottom">
@@ -122,7 +143,16 @@ function createCardElement(evt) {
     <img src="${evt.imageUrl}" alt="${evt.title}" class="event-image" loading="lazy">
     <div class="event-content">
       <div>
-        <div class="event-meta">📍 ${evt.location} | 🗓️ ${evt.date}</div>
+        <div class="event-meta">
+          <span class="event-meta-item">
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+            ${evt.date}
+          </span>
+          <span class="event-meta-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            ${evt.location}
+          </span>
+        </div>
         <h3 class="event-title">${evt.title}</h3>
         <p class="event-desc">${evt.description}</p>
       </div>
@@ -152,3 +182,21 @@ function renderEvents() {
     });
   }
 }
+
+// Découpage de l'adresse e-mail pour éviter la détection automatique
+function displayProtectedEmail() {
+  const user = "contact";
+  const domain = "buto-aleika.fr";
+  const emailContainer = document.getElementById('email-protection');
+
+  if (emailContainer) {
+    const fullEmail = `${user}@${domain}`;
+    emailContainer.innerHTML = `<a href="mailto:${fullEmail}" style="color: var(--accent-carmine); font-weight: 500;">${fullEmail}</a>`;
+  }
+}
+
+// À appeler dans le bloc DOMContentLoaded de components.js :
+document.addEventListener('DOMContentLoaded', () => {
+  // ... votre code existant pour le header/footer ...
+  displayProtectedEmail();
+});

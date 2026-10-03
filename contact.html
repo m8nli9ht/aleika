@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact & Inscriptions — Danse Butō Toulouse | Aleïka</title>
-  <meta name="description" content="Contactez Aleïka pour vous inscrire à un atelier ou stage de danse Butō à Toulouse et en région Occitanie.">
+  <meta name="description" content="Inscrivez-vous aux cours et stages de danse Butō à Toulouse & Occitanie. Contactez Aleïka pour toute information.">
+  <link rel="canonical" href="https://buto-aleika.fr/contact.html">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,27 +14,86 @@
 </head>
 <body>
 
+  <!-- Menu dynamique généré par components.js -->
   <div id="main-header"></div>
 
   <main>
     <section class="page-section">
-      <h1 class="page-title">Contacter Aleïka / Informations Pratiques</h1>
+      <h1 class="page-title">
+        Contact & Inscriptions
+        <span class="location-subtitle">Toulouse & Région Occitanie</span>
+      </h1>
 
-      <p>Pour toute question sur les ateliers, l'organisation d'un stage ou des renseignements sur la pratique du Butō :</p>
+      <p class="lead-text">
+        Une question sur les ateliers, les stages ou la pratique du Butō ? Remplissez le formulaire ci-dessous ou écrivez-nous directement par message.
+      </p>
 
-      <div class="quote-box" style="margin-top: 2rem;">
-        <p><strong>E-mail direct :</strong> <a href="mailto:contact@buto-aleika.fr" style="color: var(--accent-carmine);">contact@buto-aleika.fr</a></p>
-        <p><strong>Zone d'intervention :</strong> Toulouse et région Occitanie.</p>
-        <p><strong>Inscription :</strong> Les inscriptions s'effectuent par e-mail direct ou en cliquant sur les boutons « Réserver ma place » sur la page Programme.</p>
-      </div>
+      <div class="contact-grid">
+        <!-- FORMULAIRE DE CONTACT OPTIMISÉ -->
+        <form class="contact-form" action="https://formspree.io/f/ton-id-formspree" method="POST" aria-label="Formulaire de contact">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom *</label>
+              <input type="text" id="nom" name="nom" required autocomplete="family-name" placeholder="Votre nom">
+            </div>
 
-      <div class="social-links">
-        <a href="https://www.facebook.com/profile.php?id=100057554694577" target="_blank" rel="noopener" class="social-link">Page Facebook</a>
-        <a href="https://www.instagram.com/aleika31/" target="_blank" rel="noopener" class="social-link">Profil Instagram</a>
+            <div class="form-group">
+              <label for="prenom">Prénom *</label>
+              <input type="text" id="prenom" name="prenom" required autocomplete="given-name" placeholder="Votre prénom">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="nom@exemple.fr">
+            </div>
+
+            <div class="form-group">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder="06 00 00 00 00">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Précisez votre demande (inscription à un stage, atelier, renseignement...)..."></textarea>
+          </div>
+
+          <button type="submit" class="btn">Envoyer le message</button>
+        </form>
+
+        <!-- INFORMATIONS COMPLÉMENTAIRES & CONTACT PROTÉGÉ -->
+        <aside class="contact-info">
+          <div class="quote-card style-poetic" style="margin: 0;">
+            <h2 class="quote-title" style="font-size: 1.15rem; font-weight: normal;">
+              <span class="kanji-accent">信</span> Informations Pratiques
+            </h2>
+            <div class="quote-body">
+              <p><strong>E-mail direct :</strong><br>
+                <span id="email-protection"><em>Chargement...</em></span>
+              </p>
+              
+              <p style="margin-top: 1.2rem;"><strong>Zone d'intervention :</strong><br>
+                Toulouse, Haute-Garonne et Région Occitanie.
+              </p>
+              
+              <p style="margin-top: 1.2rem;"><strong>Réservations :</strong><br>
+                Vous pouvez réserver directement via le formulaire ci-contre ou consulter le programme sur la page <a href="stages-ateliers.html" style="color: var(--accent-carmine); text-decoration: underline;">Stages & Ateliers</a>.
+              </p>
+            </div>
+          </div>
+
+          <div class="social-links" style="margin-top: 1.5rem;">
+            <a href="https://www.facebook.com/profile.php?id=100057554694577" target="_blank" rel="noopener noreferrer" class="social-link">Facebook</a>
+            <a href="https://www.instagram.com/aleika31/" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
+          </div>
+        </aside>
       </div>
     </section>
   </main>
 
+  <!-- Footer dynamique généré par components.js -->
   <div id="main-footer"></div>
 
   <script src="components.js"></script>
