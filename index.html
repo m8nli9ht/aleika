@@ -3,23 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aleïka — Danse Butō à Toulouse & Occitanie</title>
-  <meta name="description" content="Ateliers, cours et stages de danse Butō à Toulouse et en région Occitanie avec Aleïka. L'art du mouvement incarné.">
+  <title>Aleïka — Danse Butō à Toulouse & Occitanie | Ateliers & Stages</title>
+  <meta name="description" content="Ateliers, cours hebdomadaires et stages de danse Butō à Toulouse et en région Occitanie avec Aleïka. Découvrez l'art du mouvement incarné et de la présence.">
+  <link rel="canonical" href="https://buto-aleika.fr/index.html">
   
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Aleïka — Danse Butō à Toulouse & Occitanie">
+  <meta property="og:description" content="Ateliers, cours et stages de danse Butō à Toulouse et en région Occitanie avec Aleïka. L'art du mouvement incarné.">
+  <meta property="og:url" content="https://buto-aleika.fr/index.html">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aleïka — Danse Butō à Toulouse & Occitanie">
+  <meta name="twitter:description" content="Ateliers, cours et stages de danse Butō à Toulouse et en région Occitanie avec Aleïka.">
+
+  <!-- Preconnect Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Données Structurées JSON-LD pour le SEO Local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PerformingGroup",
+    "name": "Aleïka — Danse Butō",
+    "description": "Cours, ateliers et stages de danse Butō à Toulouse et en Occitanie.",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Toulouse",
+        "addressRegion": "Occitanie",
+        "addressCountry": "FR"
+      }
+    },
+    "url": "https://buto-aleika.fr"
+  }
+  </script>
 </head>
 <body>
 
+  <!-- Injection dynamique du menu via components.js -->
   <div id="main-header"></div>
 
   <main>
     <section class="page-section">
       
       <!-- HERO SECTION -->
-      <div class="hero">
+      <header class="hero">
         <h1 class="page-title-hero">
           Danse Butō
           <span class="location-subtitle">à Toulouse & Occitanie</span>
@@ -27,23 +62,25 @@
         <p class="subtitle">“L’art du mouvement incarné”</p>
         <p class="subtitle brand-name">Aleïka</p>
         <a href="stages-ateliers.html" class="btn">Ateliers & Stages</a>
-      </div>
+      </header>
 
       <!-- QUOTE BOX 1 : L'écoute du corps -->
       <article class="quote-card">
-        <h3 class="quote-title">La vie est mouvement. Le corps est mouvement.</h3>
+        <h2 class="quote-title">La vie est mouvement. Le corps est mouvement.</h2>
         <div class="quote-highlight">
           “Ta propre danse, toi seule peux la danser.”
         </div>
       </article>
 
       <!-- SECTION EVENEMENTS -->
-      <h2 class="section-subtitle">Ateliers & Stages</h2>
-      <div id="home-events-preview" class="events-grid"></div>
-      
-      <div style="text-align: center; margin-top: 2rem; margin-bottom: 3rem;">
-        <a href="stages-ateliers.html" class="btn btn-secondary">Voir tout l'agenda</a>
-      </div>
+      <section aria-labelledby="events-heading">
+        <h2 id="events-heading" class="section-subtitle">Prochains Ateliers & Stages</h2>
+        <div id="home-events-preview" class="events-grid"></div>
+        
+        <div style="text-align: center; margin-top: 2rem; margin-bottom: 3rem;">
+          <a href="stages-ateliers.html" class="btn btn-secondary">Voir tout l'agenda</a>
+        </div>
+      </section>
 
       <!-- QUOTE BOX 2 : La Présence et la Conscience -->
       <article class="quote-card">
@@ -53,26 +90,13 @@
 
       <!-- QUOTE BOX 3 : L'Expérience vécue -->
       <article class="quote-card">
-        <h3 class="quote-title">Une expérience à vivre</h3>
+        <h2 class="quote-title">Une expérience à vivre</h2>
         <div class="quote-body">
           <p>Le Butô, c’est une invitation à rencontrer le mouvement autrement.</p>
-          <br>
-        <p>Un mouvement qui n’est pas appris,</p>
-        <p>qui n’est pas pensé,</p>
-        <p>mais qui émerge du corps.</p>
-          
-        <br>
-          
-        <p>Décristalliser, ressentir,</p>
-        <p>laisser le mental s’effacer un peu…</p>
-          
-        <br>
-      
-        <p>Et découvrir ta propre danse.</p>
-        <br>
-        
-        <p>Parce que ta danse,</p>
-        <p>personne d’autre ne peut la danser..</p>
+          <p>Un mouvement qui n’est pas appris, qui n’est pas pensé, mais qui émerge du corps.</p>
+          <p>Décristalliser, ressentir, laisser le mental s’effacer un peu…</p>
+          <p>Et découvrir ta propre danse.</p>
+          <p>Parce que ta danse, personne d’autre ne peut la danser.</p>
         </div>
         <div class="quote-highlight">
           “Cela ne s’apprend pas seulement. Cela se vit.”
@@ -82,6 +106,7 @@
     </section>
   </main>
 
+  <!-- Injection dynamique du footer via components.js -->
   <div id="main-footer"></div>
 
   <script src="components.js"></script>
